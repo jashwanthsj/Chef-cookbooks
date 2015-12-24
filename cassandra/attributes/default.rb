@@ -3,9 +3,9 @@ default['cassandra']['component']      =  %w(stable main)
 default['cassandra']['key']            = 'http://debian.datastax.com/debian/repo_key'
 default['cassandra']['apt']['action']  = :add
 
-default['cassandra']['cassandra_version']  = '2.1.8'
+#default['cassandra']['cassandra_version']  = '2.1.8'
 
-default['cassandra']['cluster_name'] = 'Prod_Cluster'
+#default['cassandra']['cluster_name'] = 'Prod_Cluster'
 default['cassandra']['authenticator'] = 'PasswordAuthenticator'
 default['cassandra']['authorizer'] = 'CassandraAuthorizer'
 default['cassandra']['data_file_directories'] = '[]'
