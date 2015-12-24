@@ -6,11 +6,11 @@ default['cassandra']['apt']['action']  = :add
 #default['cassandra']['cassandra_version']  = '2.1.8'
 
 #default['cassandra']['cluster_name'] = 'Prod_Cluster'
-default['cassandra']['authenticator'] = 'PasswordAuthenticator'
-default['cassandra']['authorizer'] = 'CassandraAuthorizer'
+#default['cassandra']['authenticator'] = 'PasswordAuthenticator'
+#default['cassandra']['authorizer'] = 'CassandraAuthorizer'
 default['cassandra']['data_file_directories'] = '[]'
 default['cassandra']['seeds'] = '[]'
 default['cassandra']['listen_address'] = '[]'
 default['cassandra']['rpc_address'] = '[]'
-default['cassandra']['endpoint_snitch'] = 'Ec2Snitch'
+#default['cassandra']['endpoint_snitch'] = 'Ec2Snitch'
 
