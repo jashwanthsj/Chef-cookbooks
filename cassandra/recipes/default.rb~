@@ -1,0 +1,25 @@
+include_recipe 'java::default'
+
+
+apt_repository 'cassandra' do
+ uri node['cassandra']['source_url']
+ components node['cassandra']['component']
+ key node['cassandra']['key']
+ action :add
+end
+
+package 'cassandra' do
+  action :install
+end
+
+template '/etc/cassandra/cassandra.yaml' do
+  source 'cassandra.yaml.erb'
+  owner 'root'
+  group 'root'
+  mode '0777'
+end 
+
+execute 'cassandra' do
+  command 'sudo service cassandra stop'
+end
+
