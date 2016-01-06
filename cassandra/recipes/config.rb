@@ -3,3 +3,4 @@ template '/etc/cassandra/cassandra.yaml' do
   owner 'root'
   group 'root'
   mode '0777'
+end
