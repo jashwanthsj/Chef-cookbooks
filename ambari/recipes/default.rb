@@ -15,7 +15,7 @@ yum_package 'ntp' do
 end
 
 execute 'chkconfig' do
-	command 'chkconfig ntpd on'
+	command 'systemctl enable ntpd.service'
 end
 
 service 'ntpd' do
@@ -32,13 +32,13 @@ template '/etc/selinux/config' do
 	group 'root'
 end
 
-execute 'chkconfig' do
-	command 'chkconfig iptables off'
-end
+#execute 'chkconfig' do
+#	command 'chkconfig iptables off'
+#end
 
-service 'iptables' do
-	action :stop
-end
+#service 'iptables' do
+#	action :stop
+#end
 
 yum_package 'ambari-server' do
 	action :install
