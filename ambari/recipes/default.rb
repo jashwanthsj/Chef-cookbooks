@@ -57,7 +57,7 @@ execute 'start ambari-server' do
 	command '/usr/sbin/ambari-server start'
 end
 
-include_recipe 'ambari::pub_add'
+#include_recipe 'ambari::pub_add'
 
 template '/root/.ssh/id_rsa' do
         source 'key.erb'
