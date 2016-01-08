@@ -1,22 +1,22 @@
 ######AMBARI-SERVER #########
-execute 'update' do
-    command 'apt-get update'
+apt_package 'chkconfig' do
+        action :install
 end
 
 #yum_repository = node['ambari']['repo']
 
-apt_repository 'Ambari' do
-    uri node['ambari-server-ubuntu']['repo']
-    distribution 'Ambari'
-    components ['main']
-    keyserver 'hkp://keyserver.ubuntu.com:80'
-    key 'B9733A7A07513CAD'
-action :add  
+apt_repository 'ambari' do
+   uri 'http://public-repo-1.hortonworks.com/ambari/ubuntu12/2.x/updates/2.0.0'
+   distribution 'Ambari'
+   components ['main']
+   keyserver 'hkp://keyserver.ubuntu.com:80'
+   key 'B9733A7A07513CAD'
 end
 
-apt_package 'chkconfig' do
-        action :install
+execute 'update' do
+    command 'apt-get update'
 end
+
 
 apt_package 'ntp' do
 	action :install
@@ -50,7 +50,6 @@ end
 
 apt_package 'ambari-server' do
 	action :install
-    version node['ambari-server-ubuntu']['ambari_version']
 end
 
 execute 'do setup' do
