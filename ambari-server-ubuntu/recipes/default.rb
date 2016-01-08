@@ -11,7 +11,8 @@ apt_repository 'Ambari' do
     components ['main']
     keyserver 'hkp://keyserver.ubuntu.com:80'
     key 'B9733A7A07513CAD'
-  end
+action :add  
+end
 
 apt_package 'chkconfig' do
         action :install
