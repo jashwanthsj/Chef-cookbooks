@@ -8,9 +8,9 @@ end
 apt_repository 'Ambari' do
     uri node['ambari-server-ubuntu']['repo']
     distribution 'Ambari'
-    components ['main']
-    keyserver    'hkp://keyserver.ubuntu.com:80'
-    key          'B9733A7A07513CAD'
+    components '%w(stable main)'
+    keyserver 'hkp://keyserver.ubuntu.com:80'
+    key 'B9733A7A07513CAD'
   end
 
 apt_package 'chkconfig' do
@@ -49,7 +49,7 @@ end
 
 apt_package 'ambari-server' do
 	action :install
-        version node['ambari']['ambari_version']
+    version node['ambari']['ambari_version']
 end
 
 execute 'do setup' do
