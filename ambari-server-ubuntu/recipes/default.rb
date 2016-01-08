@@ -3,11 +3,6 @@ execute 'update' do
     command 'apt-get update'
 end
 
-apt_package 'chkconfig' do
-        action :install
-end
-
-
 #yum_repository = node['ambari']['repo']
 
 apt_repository 'Ambari' do
@@ -17,6 +12,10 @@ apt_repository 'Ambari' do
     keyserver    'hkp://keyserver.ubuntu.com:80'
     key          'B9733A7A07513CAD'
   end
+
+apt_package 'chkconfig' do
+        action :install
+end
 
 apt_package 'ntp' do
 	action :install
@@ -40,13 +39,13 @@ end
 #	group 'root'
 #end
 
-execute 'chkconfig' do
-	command 'chkconfig iptables off'
-end
+#execute 'chkconfig' do
+#	command 'chkconfig iptables off'
+#end
 
-service 'iptables' do
-	action :stop
-end
+#service 'iptables' do
+#	action :stop
+#end
 
 apt_package 'ambari-server' do
 	action :install
