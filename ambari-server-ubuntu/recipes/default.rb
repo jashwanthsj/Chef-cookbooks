@@ -8,7 +8,7 @@ end
 apt_repository 'Ambari' do
     uri node['ambari-server-ubuntu']['repo']
     distribution 'Ambari'
-    components 'stable main'
+    components ['main']
     keyserver 'hkp://keyserver.ubuntu.com:80'
     key 'B9733A7A07513CAD'
   end
