@@ -3,6 +3,11 @@ execute 'update' do
     command 'apt-get update'
 end
 
+apt_package 'chkconfig' do
+        action :install
+end
+
+
 #yum_repository = node['ambari']['repo']
 
 apt_repository 'Ambari' do
