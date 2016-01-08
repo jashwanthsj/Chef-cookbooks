@@ -1,4 +1,4 @@
-name 'ambari'
+name 'ambari-server-ubuntu'
 maintainer 'jashwanth'
 maintainer_email 'jashwanth.sj@minjar.com'
 license 'Hortonworks'
