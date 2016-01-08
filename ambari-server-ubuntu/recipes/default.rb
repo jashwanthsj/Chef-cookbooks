@@ -49,6 +49,7 @@ end
 
 apt_package 'ambari-server' do
 	action :install
+        version node['ambari']['ambari_version']
 end
 
 execute 'do setup' do
