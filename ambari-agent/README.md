@@ -3,4 +3,4 @@ Just enabling passwordless login between ambari server and agent servers
 
 Tested and supported on.
 
-CentOS release 6.5
+Ubuntu 12.04

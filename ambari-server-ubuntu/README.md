@@ -3,4 +3,4 @@ Install and configure ambari 2.0.0
 
 Tested and supported on.
 
-CentOS release 6.5
+Ubuntu 12.04
