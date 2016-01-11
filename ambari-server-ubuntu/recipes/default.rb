@@ -46,3 +46,9 @@ template '/root/.ssh/id_rsa' do
         group 'root'
         mode '0400'
 end
+
+execute "generate ssh key for root." do
+    user root
+    creates "/root/.ssh/hdp.pub"
+    command "ssh-keygen -t rsa -q -f /root/.ssh/hdp.pub -P \"\""
+  end
