@@ -49,4 +49,5 @@ end
 
 execute 'generate ssh key for root.' do
     command 'ssh-keygen -t rsa -q -f /root/.ssh/hdp -q -N ""'
+    not_if { ::File.exist?('/root/.ssh/hdp') }
 end
