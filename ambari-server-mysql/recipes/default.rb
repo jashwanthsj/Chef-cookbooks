@@ -32,6 +32,10 @@ apt_package 'mysql-client-core-5.5' do
     action :install
 end
 
+apt_package 'expect' do
+        action :install
+end
+
 apt_package 'ambari-server' do
 	action :install
 end
@@ -39,7 +43,7 @@ end
 bash 'Ambari Setup' do
         user 'root'
         code <<-EOF
-        ambari-server setup
+        /usr/bin/expect -c 'ambari-server setup
         expect "Ambari-server daemon is configured to run under user 'root'. Change this setting [y/n] (n)?"
         send "n\r"
         expect "Do you want to change Oracle JDK [y/n] (n)?"
@@ -48,17 +52,17 @@ bash 'Ambari Setup' do
         send "y\r"
         expect "Enter choice (1):"
         send "3\r"
-	    expect "Hostname (localhost):"
-	    send "#{node['ambari-server-ubuntu']['dbhostname']}\r"
-	    expect "Port (3306):"
-	    send "3306\r"
-	    expect "Database name (ambari):"
-	    send "#{node['ambari-server-ubuntu']['dbname']}\r"
-	    expect "Username (ambari):"
+	expect "Hostname (localhost):"
+	send "#{node['ambari-server-ubuntu']['dbhostname']}\r"
+	expect "Port (3306):"
+	send "3306\r"
+	expect "Database name (ambari):"
+	send "#{node['ambari-server-ubuntu']['dbname']}\r"
+	expect "Username (ambari):"
         send "ambari\r"
-	    expect "Enter Database Password (bigdata):"
+	expect "Enter Database Password (bigdata):"
         send "bigdata\r"
-	    expect "Re-enter password:"
+	expect "Re-enter password:"
         send "bigdata\r"
         expect eof'
         EOF
