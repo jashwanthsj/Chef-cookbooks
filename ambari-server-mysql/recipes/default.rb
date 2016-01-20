@@ -64,12 +64,12 @@ bash 'Ambari Setup' do
         EOF
     end
 
-execute 'create schema for ambari' do
-	command 'mysql -h node['ambari-server-ubuntu']['dbhostname'] -P 3306 -u node['ambari-server-ubuntu']['dbusername'] -p"#{node['ambari-server-ubuntu']['dbpasswd']}" node['ambari-server-ubuntu']['dbname'] <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql'
-end
+#execute 'create schema for ambari' do
+#	command 'mysql -h node['ambari-server-ubuntu']['dbhostname'] -P 3306 -u node['ambari-server-ubuntu']['dbusername'] -p"#{node['ambari-server-ubuntu']['dbpasswd']}" node['ambari-server-ubuntu']['dbname'] <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql'
+#end
 
 execute 'start ambari-server' do
-	command '/usr/sbin/ambari-server start'
+	command '/usr/sbin/ambari-server stop'
 end
 
 template '/root/.ssh/id_rsa' do
