@@ -3,6 +3,10 @@ apt_package 'chkconfig' do
         action :install
 end
 
+apt_package 'libmysql-java' do
+        action :install
+end
+
 apt_repository 'ambari' do
    uri node['ambari-server-ubuntu']['uri']
    distribution node['ambari-server-ubuntu']['distribution']
