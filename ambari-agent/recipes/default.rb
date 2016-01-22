@@ -1,4 +1,3 @@
-
 template '/root/.ssh/id_rsa' do
 	source 'key.erb'
 	owner 'root'
