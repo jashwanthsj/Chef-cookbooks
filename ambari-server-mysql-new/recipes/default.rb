@@ -53,7 +53,7 @@ execute 'create schema for ambari' do
 end
 
 execute 'start ambari-server' do
-	command '/usr/sbin/ambari-server stop'
+	command '/usr/sbin/ambari-server start'
 end
 
 template '/root/.ssh/id_rsa' do
