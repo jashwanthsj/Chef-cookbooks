@@ -48,6 +48,10 @@ execute 'setup ambari-server' do
     command "ambari-server setup -s --database=mysql --databasehost=#{node['ambari-server-ubuntu']['dbhostname']} --databaseport=3306 --databasename=#{node['ambari-server-ubuntu']['dbname']} --databaseusername=ambari --databasepassword=bigdata"
 end
 
+execute 'create schema for ambari' do
+        command "mysql -h #{node['ambari-server-ubuntu']['dbhostname']} -P 3306 -u #{node['ambari-server-ubuntu']['dbusername']} -p'#{node['ambari-server-ubuntu']['dbpasswd']}' #{node['ambari-server-ubuntu']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql"
+end
+
 =begin
 bash 'Ambari Setup' do
         user 'root'
