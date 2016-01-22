@@ -44,6 +44,10 @@ apt_package 'ambari-server' do
 	action :install
 end
 
+execute 'setup ambari-server' do
+    command "ambari-server setup -s --database=mysql --databasehost=node['ambari-server-ubuntu']['dbhostname'] --databaseport=3306 --databasename=node['ambari-server-ubuntu']['dbname'] --databaseusername=ambari --databasepassword=bigdata"
+end
+
 =begin
 bash 'Ambari Setup' do
         user 'root'
