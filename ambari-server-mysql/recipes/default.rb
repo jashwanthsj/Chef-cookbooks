@@ -68,15 +68,13 @@ bash 'Ambari Setup' do
         send "bigdata\r"
 	expect "Re-enter password:"
         send "bigdata\r"
-        expect "Proceed with configuring remote database connection properties [y/n] (y)?"
-        send "y\r"
         expect eof'
         EOF
     end
 
-execute 'create schema for ambari' do
-	command "mysql -h node['ambari-server-ubuntu']['dbhostname'] -P 3306 -u node['ambari-server-ubuntu']['dbusername'] -p'#{node['ambari-server-ubuntu']['dbpasswd']}' node['ambari-server-ubuntu']['dbname'] <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql"
-end
+#execute 'create schema for ambari' do
+#	command 'mysql -h node['ambari-server-ubuntu']['dbhostname'] -P 3306 -u node['ambari-server-ubuntu']['dbusername'] -p"#{node['ambari-server-ubuntu']['dbpasswd']}" node['ambari-server-ubuntu']['dbname'] <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql'
+#end
 
 execute 'start ambari-server' do
 	command '/usr/sbin/ambari-server stop'
