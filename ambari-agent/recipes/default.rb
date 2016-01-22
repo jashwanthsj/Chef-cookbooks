@@ -1,4 +1,3 @@
-#include_recipe 'ambari-agent::pub_add'
 
 template '/root/.ssh/id_rsa' do
 	source 'key.erb'
@@ -17,3 +16,5 @@ file '/root/.ssh/temp.pub' do
   owner 'root'
   group 'root'
 end
+
+include_recipe 'ambari-agent::pub_add'
