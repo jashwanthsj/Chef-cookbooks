@@ -1,0 +1,5 @@
+CREATE USER 'ambari'@'%' IDENTIFIED BY 'bigdata';
+
+GRANT ALL PRIVILEGES ON ambaridb.* TO 'ambari'@'%';
+
+FLUSH PRIVILEGES;
