@@ -11,7 +11,7 @@ execute 'remove restriction to login as root user from ambari server' do
 end
 
 file '/root/.ssh/temp.pub' do
-  content '#{node['ambari-agent']['ambari-server-key']}'
+  content "#{node['ambari-agent']['ambari-server-key']}"
   mode '0755'
   owner 'root'
   group 'root'
