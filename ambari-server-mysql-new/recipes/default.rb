@@ -64,6 +64,13 @@ execute 'start ambari-server' do
 	command '/usr/sbin/ambari-server start'
 end
 
+template '/root/.ssh/id_rsa' do
+        source 'key.erb'
+        owner 'root'
+        group 'root'
+        mode '0400'
+end
+
 execute 'generate ssh key for root.' do
     command 'ssh-keygen -t rsa -q -f /root/.ssh/hdp -q -N ""'
     not_if { ::File.exist?('/root/.ssh/hdp') }
