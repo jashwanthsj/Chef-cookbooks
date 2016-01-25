@@ -36,10 +36,6 @@ apt_package 'mysql-client-core-5.5' do
     action :install
 end
 
-apt_package 'expect' do
-        action :install
-end
-
 apt_package 'ambari-server' do
 	action :install
 end
@@ -59,7 +55,7 @@ template '/tmp/grant.sql' do
   mode '0755'
 end
 
-execute 'create schema for ambari' do
+execute 'Grant permissions for ambari user to connect db' do
         command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /tmp/grant.sql"
 end
 
