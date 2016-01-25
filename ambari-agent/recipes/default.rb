@@ -1,10 +1,3 @@
-template '/root/.ssh/id_rsa' do
-	source 'key.erb'
-	owner 'root'
-	group 'root'
-	mode '0400'
-end
-
 execute 'remove restriction to login as root user from ambari server' do
     command "sed -i -r 's/.{155}//' /root/.ssh/authorized_keys"
 end
