@@ -2,12 +2,11 @@ language: ruby
 rvm:
 - 2.1.0
 sudo: required
-gem install bundler --pre
 gemfile:
   - Gemfile
 before_install:
   - export GEM_HOME=$PWD/vendor/bundle/ruby/2.1.0
-  - gem install bundler
+  - gem install bundler --pre
 cache: bundler
 branches:
   only:
