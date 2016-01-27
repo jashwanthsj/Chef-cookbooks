@@ -2,3 +2,8 @@ language: ruby
 rvm:
 - 2.1.0
 sudo: required
+gemfile:
+  - Gemfile
+branches:
+  only:
+    - master
