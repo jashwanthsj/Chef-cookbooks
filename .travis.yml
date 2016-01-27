@@ -1,7 +1,8 @@
 language: ruby
 rvm:
-- 1.9.1
+- 2.1.0
 sudo: required
+gem install bundler --pre
 gemfile:
   - Gemfile
 before_install:
