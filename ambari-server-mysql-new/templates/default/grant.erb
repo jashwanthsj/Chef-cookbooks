@@ -1,3 +1,3 @@
-GRANT ALL PRIVILEGES ON ambaridb.* TO 'ambari'@'%';
+GRANT ALL PRIVILEGES ON <%= node['ambari-server-mysql-new']['dbname'] %>.* TO 'ambari'@'%';
 
 FLUSH PRIVILEGES;
