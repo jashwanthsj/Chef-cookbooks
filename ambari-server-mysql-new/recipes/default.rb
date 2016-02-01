@@ -23,14 +23,14 @@ end
 #        action :install
 #end
 
-script "install_something" do
+script "install latest mysql driver" do
   interpreter "bash"
   user "root"
   cwd "/tmp"
   code <<-EOH
-    wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.38.zip
-    unzip mysql-connector-java-5.1.38.zip
-    mv mysql-connector-java-5.1.38/mysql-connector-java-5.1.38-bin.jar /usr/share/java
+    wget http://dev.mysql.com/get/Downloads/Connector-J/#{node['ambari-server-mysql-new']['driver']}.zip
+    unzip #{node['ambari-server-mysql-new']['driver']}.zip
+    mv #{node['ambari-server-mysql-new']['driver']}/#{node['ambari-server-mysql-new']['driver']}-bin.jar /usr/share/java
   EOH
 end
 
