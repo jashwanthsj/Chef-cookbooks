@@ -59,6 +59,10 @@ execute 'setup ambari-server' do
     command "ambari-server setup -s --database=mysql --databasehost=#{node['ambari-server-mysql-new']['dbhostname']} --databaseport=3306 --databasename=#{node['ambari-server-mysql-new']['dbname']} --databaseusername=ambari --databasepassword=bigdata"
 end
 
+execute 'Initialize JDBC driver' do
+    command "ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/#{node['ambari-server-mysql-new']['driver']}-bin.jar"
+end
+
 execute 'create schema for ambari' do
         command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql"
 end
