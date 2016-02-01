@@ -3,10 +3,6 @@ apt_package 'chkconfig' do
         action :install
 end
 
-apt_package 'libmysql-java' do
-        action :install
-end
-
 apt_repository 'ambari' do
    uri node['ambari-server-mysql-new']['uri']
    distribution node['ambari-server-mysql-new']['distribution']
@@ -19,6 +15,9 @@ execute 'update' do
     command 'apt-get update'
 end
 
+apt_package 'libmysql-java' do
+        action :install
+end
 
 apt_package 'ntp' do
 	action :install
