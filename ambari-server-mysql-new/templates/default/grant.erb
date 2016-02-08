@@ -1,4 +1,4 @@
-create database `<%= node['ambari-server-mysql-new']['dbname'] %>`;
+CREATE DATABASE IF NOT EXISTS `<%= node['ambari-server-mysql-new']['dbname'] %>`;
 
 GRANT ALL PRIVILEGES ON <%= node['ambari-server-mysql-new']['dbname'] %>.* TO '<%= node['ambari-server-mysql-new']['dbusername'] %>'@'%';
 
