@@ -1,3 +1,7 @@
-GRANT ALL PRIVILEGES ON <%= node['ambari-server-mysql-new']['dbname'] %>.* TO 'ambari'@'%';
+drop database `<%= node['ambari-server-mysql-new']['dbname'] %>`;
+
+create database `<%= node['ambari-server-mysql-new']['dbname'] %>`;
+
+GRANT ALL PRIVILEGES ON <%= node['ambari-server-mysql-new']['dbname'] %>.* TO '<%= node['ambari-server-mysql-new']['dbusername'] %>'@'%';
 
 FLUSH PRIVILEGES;

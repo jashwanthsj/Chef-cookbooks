@@ -56,15 +56,11 @@ apt_package 'ambari-server' do
 end
 
 execute 'setup ambari-server' do
-    command "ambari-server setup -s --database=mysql --databasehost=#{node['ambari-server-mysql-new']['dbhostname']} --databaseport=3306 --databasename=#{node['ambari-server-mysql-new']['dbname']} --databaseusername=ambari --databasepassword=bigdata"
+    command "ambari-server setup -s --database=mysql --databasehost=#{node['ambari-server-mysql-new']['dbhostname']} --databaseport=3306 --databasename=#{node['ambari-server-mysql-new']['dbname']} --databaseusername=#{node['ambari-server-mysql-new']['dbusername']} --databasepassword=#{node['ambari-server-mysql-new']['dbpasswd']}"
 end
 
 execute 'Initialize JDBC driver' do
     command "ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/#{node['ambari-server-mysql-new']['driver']}-bin.jar"
-end
-
-execute 'create schema for ambari' do
-        command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql"
 end
 
 template '/tmp/grant.sql' do
@@ -72,6 +68,10 @@ template '/tmp/grant.sql' do
   owner 'root'
   group 'root'
   mode '0755'
+end
+
+execute 'create schema for ambari' do
+        command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql"
 end
 
 execute 'Grant permissions for ambari user to connect db' do
