@@ -74,9 +74,14 @@ execute 'Grant permissions for ambari user to connect db' do
         command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' <  /tmp/grant.sql"
 end
 
-execute 'create tables for ambari' do
-        command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql"
-end
+bash 'create-tables' do
+	user 'root'
+	cwd '/home/'
+	code <<-EOH
+        if ! mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} ; then
+            mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql
+	EOH
+end 
 
 execute 'start ambari-server' do
 	command '/usr/sbin/ambari-server start'
