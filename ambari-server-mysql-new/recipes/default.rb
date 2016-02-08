@@ -71,7 +71,7 @@ template '/tmp/grant.sql' do
 end
 
 execute 'Grant permissions for ambari user to connect db' do
-        command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /tmp/grant.sql"
+        command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' <  /tmp/grant.sql"
 end
 
 execute 'create schema for ambari' do
