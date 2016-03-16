@@ -74,28 +74,30 @@ execute 'Grant permissions for ambari user to connect db' do
         command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' <  /tmp/grant.sql"
 end
 
+#execute 'create tables for ambari' do
+#        command "mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql"
+#end
 bash 'create-tables' do
-	user 'root'
-	cwd '/home/'
-	code <<-EOH
+        user 'root'
+        cwd '/home/'
+        code <<-EOH
         if ! mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} ; then
-            mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql
+             mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' -e "CREATE DATABASE IF NOT EXISTS #{node['ambari-server-mysql-new']['dbname']}";
+             mysql -h #{node['ambari-server-mysql-new']['dbhostname']} -P 3306 -u #{node['ambari-server-mysql-new']['dbusername']} -p'#{node['ambari-server-mysql-new']['dbpasswd']}' #{node['ambari-server-mysql-new']['dbname']} <  /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql
         fi
-	EOH
-end 
+        EOH
+end
 
 execute 'start ambari-server' do
 	command '/usr/sbin/ambari-server start'
 end
 
-template '/root/.ssh/id_rsa' do
-        source 'key.erb'
-        owner 'root'
-        group 'root'
+execute 'generate ssh key for root.' do
+    command 'ssh-keygen -t rsa -q -f /root/.ssh/id_rsa -q -N ""'
+    not_if { ::File.exist?('/root/.ssh/id_rsa') }
+end
+
+file '/root/.ssh/id_rsa' do
         mode '0400'
 end
 
-execute 'generate ssh key for root.' do
-    command 'ssh-keygen -t rsa -q -f /root/.ssh/hdp -q -N ""'
-    not_if { ::File.exist?('/root/.ssh/hdp') }
-end
