@@ -1,4 +1,4 @@
-nginx Cookbook
+Nginx Cookbook
 ==============
 
 · Install the nginx webserver via chef.
