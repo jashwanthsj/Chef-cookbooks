@@ -1,0 +1,11 @@
+
+############################  elasticsearch.yml config  #######################################    
+
+ cluster.name: <%= node['elastic']['cluster']['name'] %>
+ http.cors.enabled: <%= node['elastic']['http']['cors']['enabled'] %>
+ discovery.zen.ping.multicast.enabled: <%= node['elastic']['discovery']['zen']['ping']['multicast']['enabled'] %>
+ discovery.zen.ping.unicast.hosts: <%= node['elastic']['discovery']['zen']['ping']['unicast']['hosts'] %>
+ index.number_of_shards: <%= node['elastic']['index']['number_of_shards'] %>
+ index.number_of_replicas: <%= node['elastic']['index']['number_of_replicas'] %>
+ http.cors.allow-origin: "<%= node['elastic']['http']['cors']['allow-origin'] %>"
+    
